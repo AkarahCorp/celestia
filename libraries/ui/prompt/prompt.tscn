@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxu7q8mwkl5uk"]
+
+[ext_resource type="Shader" uid="uid://bcof33k4xv0vs" path="res://libraries/ui/prompt/darkblur.gdshader" id="1_5c6b7"]
+[ext_resource type="Script" uid="uid://cd7t1uxpoa7mr" path="res://libraries/ui/prompt/prompt.gd" id="3_22k1l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jleb1"]
+shader = ExtResource("1_5c6b7")
+shader_parameter/strength = 3.3
+shader_parameter/mix_percentage = 0.3
+
+[node name="PromptBackgroundBlur" type="ColorRect"]
+top_level = true
+material = SubResource("ShaderMaterial_jleb1")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PromptCentralization" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Prompt" type="PanelContainer" parent="PromptCentralization"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+theme_type_variation = &"Prompt"
+script = ExtResource("3_22k1l")

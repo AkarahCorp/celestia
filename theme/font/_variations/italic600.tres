@@ -1,0 +1,9 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://c5vepsvpkb4j5"]
+
+[ext_resource type="FontFile" uid="uid://co1eoqok23oq5" path="res://theme/font/fonts/AtkinsonHyperlegibleNext-Italic-VariableFont_wght.ttf" id="1_need1"]
+
+[resource]
+base_font = ExtResource("1_need1")
+variation_opentype = {
+2003265652: 600
+}

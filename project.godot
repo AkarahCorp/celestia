@@ -18,6 +18,10 @@ config/icon="res://icon.svg"
 
 window/stretch/mode="canvas_items"
 
+[gui]
+
+theme/custom="uid://5fy4olu4nidd"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

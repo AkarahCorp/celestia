@@ -1,0 +1,28 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://5fy4olu4nidd"]
+
+[ext_resource type="FontVariation" uid="uid://4w5vy3kwlwl2" path="res://theme/font/_variations/main600.tres" id="1_5x85k"]
+[ext_resource type="FontVariation" uid="uid://binohnbypnacg" path="res://theme/font/_variations/main400.tres" id="1_oy1dp"]
+[ext_resource type="FontVariation" uid="uid://c5vepsvpkb4j5" path="res://theme/font/_variations/italic600.tres" id="2_xnwjk"]
+[ext_resource type="FontVariation" uid="uid://cwn4lexc32bno" path="res://theme/font/_variations/italic400.tres" id="3_rirc8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jpedm"]
+bg_color = Color(0.0627451, 0.0627451, 0.0627451, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+shadow_color = Color(0, 0, 0, 0)
+
+[resource]
+default_font = ExtResource("1_oy1dp")
+Button/constants/icon_max_width = 20
+Prompt/base_type = &"PanelContainer"
+Prompt/styles/panel = SubResource("StyleBoxFlat_jpedm")
+RichTextLabel/fonts/bold_font = ExtResource("1_5x85k")
+RichTextLabel/fonts/bold_italics_font = ExtResource("2_xnwjk")
+RichTextLabel/fonts/italics_font = ExtResource("3_rirc8")
+RichTextLabel/fonts/normal_font = ExtResource("1_oy1dp")
