@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="Celestia"
+run/main_scene="uid://px6iappy5byf"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Unfocus="*res://libraries/autoloaded/unfocus.gd"
 
 [display]
 
@@ -26,3 +31,4 @@ theme/custom="uid://5fy4olu4nidd"
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.1564, 0.16116, 0.17, 1)

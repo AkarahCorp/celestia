@@ -1,9 +1,0 @@
-[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://cwn4lexc32bno"]
-
-[ext_resource type="FontFile" uid="uid://co1eoqok23oq5" path="res://theme/font/fonts/AtkinsonHyperlegibleNext-Italic-VariableFont_wght.ttf" id="1_ptcdy"]
-
-[resource]
-base_font = ExtResource("1_ptcdy")
-variation_opentype = {
-2003265652: 400
-}
