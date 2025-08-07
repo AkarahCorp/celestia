@@ -1,6 +1,7 @@
 Celestia is an IDE for Polaris.
 
-**License**
+## License
+
 Celestia Copyright (C) 2025 Endistic Akarah
 
 This program is free software: you can redistribute it and/or modify
