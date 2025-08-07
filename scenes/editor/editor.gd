@@ -4,6 +4,38 @@ enum TreeColumn {
 	TEXT
 }
 
+const UNKNOWN_FOLDER_ICON = preload("res://assets/icons/folders/unknown.svg")
+const UNKNOWN_FILE_ICON = preload("res://assets/icons/files/unknown.svg")
+
+const FILE_TYPE_HANDLERS: Array[Dictionary] = [
+	{
+		"pattern": "/data/*/engine/item/*.json",
+		"icon": preload("res://assets/icons/files/item.svg"),
+		"type": "item"
+	},
+	{
+		"pattern": "/data/*/engine/rule/*.json",
+		"icon": preload("res://assets/icons/files/rule.svg"),
+		"type": "rule"
+	},
+	{
+		"pattern": "*.aka",
+		"icon": preload("res://assets/icons/files/script.svg"),
+		"type": "script"
+	}
+]
+const FOLDER_TYPE_HANDLERS: Array[Dictionary] = [
+	{
+		"pattern": "/data/*/engine/rule*",
+		"icon": preload("res://assets/icons/folders/rule.svg"),
+		"type": "rule_folder"
+	}
+]
+const hidden_files: Array[String] = [
+	"/.gitattributes",
+	"/.git"
+]
+
 var directory: Directory
 var filetree: Tree
 var undo_redo = UndoRedo.new()
@@ -14,7 +46,7 @@ func _ready() -> void:
 	var split = directory.path.rsplit("/", false, 1)
 	DisplayServer.window_set_title("Celestia - %s" % split[1])
 	var root = filetree.create_item()
-	root.set_icon(TreeColumn.TEXT, preload("res://assets/icons/folder.svg"))
+	root.set_icon(TreeColumn.TEXT, UNKNOWN_FOLDER_ICON)
 	root.set_text(TreeColumn.TEXT, split[1])
 	root.set_meta("path", directory.path)
 	_create_file_tree(root, directory)
@@ -35,16 +67,46 @@ func _input(event: InputEvent) -> void:
 
 func _create_file_tree(parent: TreeItem, dir: Directory) -> void:
 	for d in dir.directories:
+		var relative_path = d.path.replace(directory.path, "")
+		if relative_path in hidden_files:
+			continue
 		var item = filetree.create_item(parent)
-		item.set_icon(TreeColumn.TEXT, preload("res://assets/icons/folder.svg"))
+		item.set_icon(TreeColumn.TEXT, UNKNOWN_FOLDER_ICON)
 		item.set_text(TreeColumn.TEXT, d.path.rsplit("/", false, 1)[1])
 		item.set_meta("path", d.path)
+		
+		var handled = false
+		for handler in FOLDER_TYPE_HANDLERS:
+			if relative_path.match(handler.pattern):
+				item.set_icon(TreeColumn.TEXT, handler.icon)
+				item.set_meta("type", handler.type)
+				handled = true
+				break
+		
+		if not handled:
+			item.set_icon(TreeColumn.TEXT, UNKNOWN_FOLDER_ICON)
+			item.set_meta("type", "unknown")
 		_create_file_tree(item, d)
 	for f in dir.files:
+		var path = "%s/%s" % [dir.path, f]
+		var relative_path = path.replace(directory.path, "")
+		if relative_path in hidden_files:
+			continue
 		var item = filetree.create_item(parent)
-		item.set_icon(TreeColumn.TEXT, preload("res://assets/icons/text_file.svg"))
+		var handled = false
+		for handler in FILE_TYPE_HANDLERS:
+			if relative_path.match(handler.pattern):
+				item.set_icon(TreeColumn.TEXT, handler.icon)
+				item.set_meta("type", handler.type)
+				handled = true
+				break
+		
+		if not handled:
+			item.set_icon(TreeColumn.TEXT, UNKNOWN_FILE_ICON)
+			item.set_meta("type", "unknown")
+
 		item.set_text(TreeColumn.TEXT, f)
-		item.set_meta("path", "%s/%s" % [dir.path, f])
+		item.set_meta("path", path)
 
 
 func _on_item_activated() -> void:
