@@ -42,11 +42,15 @@ var undo_redo = UndoRedo.new()
 
 var code_editor_manager: Node
 
+var terminal: Node
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	filetree = %FileTree as Tree
 	code_editor_manager = %CodeEditorManager
+	terminal = %Terminal
 	code_editor_manager.undo_redo = undo_redo
+	terminal.set_cwd(directory.path)
 	var split = directory.path.rsplit("/", false, 1)
 	DisplayServer.window_set_title("Celestia - %s" % split[1])
 	var root = filetree.create_item()

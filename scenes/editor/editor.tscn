@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0meu8blitsq6"]
+[gd_scene load_steps=9 format=3 uid="uid://b0meu8blitsq6"]
 
 [ext_resource type="Script" uid="uid://kte70v341dlk" path="res://scenes/editor/editor.gd" id="1_bc6i7"]
 [ext_resource type="Script" uid="uid://d4bcjd74uhli3" path="res://scenes/editor/code_editor_manager.gd" id="2_m0is4"]
 [ext_resource type="FontVariation" uid="uid://cwn4lexc32bno" path="res://theme/font/_variations/italic425.tres" id="3_5cfe8"]
+[ext_resource type="Script" uid="uid://dp6s6mhfdf2yj" path="res://scenes/editor/terminal.gd" id="4_jwsr6"]
+[ext_resource type="FontVariation" uid="uid://dqlnvracqml0f" path="res://theme/font/_variations/mono425.tres" id="5_ro56m"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bc6i7"]
 content_margin_left = 0.0
@@ -23,6 +25,9 @@ expand_margin_bottom = 1.0
 font = ExtResource("3_5cfe8")
 font_size = 24
 font_color = Color(1, 1, 1, 0.47451)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qbwwq"]
+font = ExtResource("5_ro56m")
 
 [node name="Editor" type="VBoxContainer"]
 anchors_preset = 15
@@ -72,27 +77,72 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
 
-[node name="CodeEditorManager" type="VBoxContainer" parent="Split/EditingPanel"]
+[node name="TerminalSplit" type="VSplitContainer" parent="Split/EditingPanel"]
+layout_mode = 2
+theme_override_constants/minimum_grab_thickness = 11
+dragger_visibility = 2
+drag_area_offset = -1
+
+[node name="CodeEditorManager" type="VBoxContainer" parent="Split/EditingPanel/TerminalSplit"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
 script = ExtResource("2_m0is4")
 
-[node name="Tabs" type="TabBar" parent="Split/EditingPanel/CodeEditorManager"]
+[node name="Tabs" type="TabBar" parent="Split/EditingPanel/TerminalSplit/CodeEditorManager"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Editors" type="VBoxContainer" parent="Split/EditingPanel/CodeEditorManager"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Placeholder" type="CenterContainer" parent="Split/EditingPanel/CodeEditorManager/Editors"]
+[node name="Editors" type="VBoxContainer" parent="Split/EditingPanel/TerminalSplit/CodeEditorManager"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PlaceholderLabel" type="Label" parent="Split/EditingPanel/CodeEditorManager/Editors/Placeholder"]
+[node name="Placeholder" type="CenterContainer" parent="Split/EditingPanel/TerminalSplit/CodeEditorManager/Editors"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlaceholderLabel" type="Label" parent="Split/EditingPanel/TerminalSplit/CodeEditorManager/Editors/Placeholder"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Open a file to begin editing."
 label_settings = SubResource("LabelSettings_7gtdv")
+
+[node name="TerminalPanel" type="PanelContainer" parent="Split/EditingPanel/TerminalSplit"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="Padding" type="PanelContainer" parent="Split/EditingPanel/TerminalSplit/TerminalPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"PaddedPanel"
+
+[node name="Terminal" type="VBoxContainer" parent="Split/EditingPanel/TerminalSplit/TerminalPanel/Padding"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("4_jwsr6")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Split/EditingPanel/TerminalSplit/TerminalPanel/Padding/Terminal"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TerminalText" type="Label" parent="Split/EditingPanel/TerminalSplit/TerminalPanel/Padding/Terminal/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+label_settings = SubResource("LabelSettings_qbwwq")
+autowrap_mode = 2
+
+[node name="TerminalInput" type="LineEdit" parent="Split/EditingPanel/TerminalSplit/TerminalPanel/Padding/Terminal"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Input a terminal command..."
+keep_editing_on_text_submit = true
+draw_control_chars = true

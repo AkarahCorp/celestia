@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=55 format=3 uid="uid://5fy4olu4nidd"]
+[gd_resource type="Theme" load_steps=56 format=3 uid="uid://5fy4olu4nidd"]
 
 [ext_resource type="FontVariation" uid="uid://binohnbypnacg" path="res://theme/font/_variations/main425.tres" id="1_6l1ye"]
 [ext_resource type="FontVariation" uid="uid://4w5vy3kwlwl2" path="res://theme/font/_variations/main600.tres" id="1_gco77"]
@@ -107,6 +107,12 @@ content_margin_right = 4.0
 content_margin_left = 4.0
 content_margin_top = 0.0
 content_margin_right = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fppmr"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hj1r4"]
 content_margin_left = 0.0
@@ -504,6 +510,8 @@ MenuBar/styles/disabled = SubResource("StyleBoxEmpty_6l1ye")
 MenuBar/styles/hover = SubResource("StyleBoxEmpty_4ytkp")
 MenuBar/styles/normal = SubResource("StyleBoxEmpty_rucdj")
 MenuBar/styles/pressed = SubResource("StyleBoxEmpty_omiwu")
+PaddedPanel/base_type = &"PanelContainer"
+PaddedPanel/styles/panel = SubResource("StyleBoxEmpty_fppmr")
 Panel/styles/panel = SubResource("StyleBoxFlat_hj1r4")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_p4hxb")
 PopupMenu/colors/font_separator_color = Color(0.6477, 0.612, 0.85, 1)
