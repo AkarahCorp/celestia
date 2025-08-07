@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0meu8blitsq6"]
+[gd_scene load_steps=6 format=3 uid="uid://b0meu8blitsq6"]
 
 [ext_resource type="Script" uid="uid://kte70v341dlk" path="res://scenes/editor/editor.gd" id="1_bc6i7"]
+[ext_resource type="Script" uid="uid://d4bcjd74uhli3" path="res://scenes/editor/code_editor_manager.gd" id="2_m0is4"]
+[ext_resource type="FontVariation" uid="uid://cwn4lexc32bno" path="res://theme/font/_variations/italic425.tres" id="3_5cfe8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bc6i7"]
 content_margin_left = 0.0
@@ -16,6 +18,11 @@ corner_detail = 4
 expand_margin_left = 1.0
 expand_margin_top = 1.0
 expand_margin_bottom = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_7gtdv"]
+font = ExtResource("3_5cfe8")
+font_size = 24
+font_color = Color(1, 1, 1, 0.47451)
 
 [node name="Editor" type="VBoxContainer"]
 anchors_preset = 15
@@ -65,14 +72,27 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Split/EditingPanel"]
+[node name="CodeEditorManager" type="VBoxContainer" parent="Split/EditingPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("2_m0is4")
+
+[node name="Tabs" type="TabBar" parent="Split/EditingPanel/CodeEditorManager"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TabBar" type="TabBar" parent="Split/EditingPanel/VBoxContainer"]
-layout_mode = 2
-
-[node name="CodeEdit" type="CodeEdit" parent="Split/EditingPanel/VBoxContainer"]
+[node name="Editors" type="VBoxContainer" parent="Split/EditingPanel/CodeEditorManager"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-text = "Beep Boop
-This is code."
+
+[node name="Placeholder" type="CenterContainer" parent="Split/EditingPanel/CodeEditorManager/Editors"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlaceholderLabel" type="Label" parent="Split/EditingPanel/CodeEditorManager/Editors/Placeholder"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Open a file to begin editing."
+label_settings = SubResource("LabelSettings_7gtdv")

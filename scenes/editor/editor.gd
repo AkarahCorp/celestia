@@ -40,9 +40,13 @@ var directory: Directory
 var filetree: Tree
 var undo_redo = UndoRedo.new()
 
+var code_editor_manager: Node
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	filetree = %FileTree as Tree
+	code_editor_manager = %CodeEditorManager
+	code_editor_manager.undo_redo = undo_redo
 	var split = directory.path.rsplit("/", false, 1)
 	DisplayServer.window_set_title("Celestia - %s" % split[1])
 	var root = filetree.create_item()
@@ -152,3 +156,6 @@ func _on_item_mouse_selected(position: Vector2, mouse_button_index: int) -> void
 		var selected = filetree.get_selected()
 		if selected:
 			var path = selected.get_meta("path")
+			if not DirAccess.dir_exists_absolute(path):
+				var type = selected.get_meta("type")
+				code_editor_manager.open_file(path, type)
