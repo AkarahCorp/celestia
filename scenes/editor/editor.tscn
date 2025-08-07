@@ -49,7 +49,7 @@ drag_area_offset = -1
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.2
+size_flags_stretch_ratio = 0.3
 theme_override_styles/panel = SubResource("StyleBoxFlat_bc6i7")
 
 [node name="FileTree" type="Tree" parent="Split/Files"]
@@ -64,3 +64,15 @@ custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Split/EditingPanel"]
+layout_mode = 2
+
+[node name="TabBar" type="TabBar" parent="Split/EditingPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="CodeEdit" type="CodeEdit" parent="Split/EditingPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Beep Boop
+This is code."

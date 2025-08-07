@@ -85,7 +85,7 @@ func _create_file_tree(parent: TreeItem, dir: Directory) -> void:
 		
 		if not handled:
 			item.set_icon(TreeColumn.TEXT, UNKNOWN_FOLDER_ICON)
-			item.set_meta("type", "unknown")
+			item.set_meta("type", "unknown_folder")
 		_create_file_tree(item, d)
 	for f in dir.files:
 		var path = "%s/%s" % [dir.path, f]
