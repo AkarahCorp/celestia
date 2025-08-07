@@ -11,7 +11,10 @@ config_version=5
 [application]
 
 config/name="Celestia"
+config/description="An editor for Polaris datapacks."
 run/main_scene="uid://px6iappy5byf"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="celestia"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="uid://ca8qwj5a4cngi"
 
