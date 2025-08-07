@@ -27,6 +27,10 @@ window/stretch/mode="canvas_items"
 
 theme/custom="uid://5fy4olu4nidd"
 
+[network]
+
+limits/debugger/max_chars_per_second=524288
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
