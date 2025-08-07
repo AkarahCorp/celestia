@@ -76,11 +76,12 @@ func _on_tab_close_pressed(tab: int) -> void:
 		var file_data = open_files[path_to_close]
 		open_files.erase(path_to_close)
 		file_data.editor.queue_free()
-		tabs.remove_tab(tab)
 		
 		for path in open_files:
 			if open_files[path].tab_index > tab:
 				open_files[path].tab_index -= 1
+
+		tabs.remove_tab(tab)
 
 		if open_files.is_empty():
 			placeholder.show()
