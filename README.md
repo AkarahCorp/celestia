@@ -1,7 +1,4 @@
-Celestia is a Integrated Development Environment for Polaris
-
-**Documentation**
-Documentation can be found on the wiki!
+Celestia is an IDE for Polaris.
 
 **License**
 Celestia Copyright (C) 2025 Endistic Akarah
