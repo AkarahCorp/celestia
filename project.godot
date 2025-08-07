@@ -24,7 +24,6 @@ Prompts="*res://libraries/prompts.gd"
 
 [display]
 
-window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
 [gui]
