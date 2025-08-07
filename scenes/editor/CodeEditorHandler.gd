@@ -25,8 +25,6 @@ func _on_focus_exited() -> void:
 		undo_redo.create_action("Edit %s" % file_path.get_file())
 		undo_redo.add_do_method(set.bind("text", text))
 		undo_redo.add_undo_method(set.bind("text", text_before_change))
-		undo_redo.add_do_method(_save_file)
-		undo_redo.add_undo_method(_save_file) # Save on both do and undo
 		undo_redo.commit_action()
 
 func _on_text_changed() -> void:
