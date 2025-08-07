@@ -41,10 +41,11 @@ jobs:
           path: build/windows
 
       - name: Upload asset to release
-        uses: csexton/release-asset-action@v3
+        uses: shogo82148/actions-upload-release-asset@v1
         with:
-          file: "build/windows/${{ env.EXPORT_NAME }}-windows.exe"
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: "build/windows/${{ env.EXPORT_NAME }}-windows.exe"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   export-linux:
     name: Linux Export
@@ -78,7 +79,8 @@ jobs:
           path: build/linux
 
       - name: Upload asset to release
-        uses: csexton/release-asset-action@v3
+        uses: shogo82148/actions-upload-release-asset@v1
         with:
-          file: "build/linux/${{ env.EXPORT_NAME }}-linux.x86_64"
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: "build/linux/${{ env.EXPORT_NAME }}-linux.x86_64"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
