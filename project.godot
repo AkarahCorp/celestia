@@ -17,7 +17,7 @@ config/icon="uid://ca8qwj5a4cngi"
 
 [autoload]
 
-Unfocus="*res://libraries/autoloaded/unfocus.gd"
+Prompts="*res://libraries/prompts.gd"
 
 [display]
 
