@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0meu8blitsq6"]
+
+[ext_resource type="Script" uid="uid://kte70v341dlk" path="res://scenes/editor/editor.gd" id="1_bc6i7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bc6i7"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 0.12549)
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.396889, 0.396889, 0.396889, 1)
+corner_detail = 4
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[node name="Editor" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 1
+script = ExtResource("1_bc6i7")
+
+[node name="MenuBar" type="MenuBar" parent="."]
+layout_mode = 2
+
+[node name="Edit" type="PopupMenu" parent="MenuBar"]
+
+[node name="Edit2" type="PopupMenu" parent="MenuBar"]
+auto_translate_mode = 1
+
+[node name="Edit3" type="PopupMenu" parent="MenuBar"]
+auto_translate_mode = 1
+
+[node name="Split" type="HSplitContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+theme_override_constants/minimum_grab_thickness = 11
+dragger_visibility = 2
+drag_area_offset = -1
+
+[node name="Files" type="PanelContainer" parent="Split"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bc6i7")
+
+[node name="FileTree" type="Tree" parent="Split/Files"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EditingPanel" type="PanelContainer" parent="Split"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
