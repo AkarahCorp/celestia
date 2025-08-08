@@ -21,7 +21,6 @@ const hidden_files: Array[String] = [
 
 var directory: Directory
 var filetree: Tree
-var undo_redo = UndoRedo.new()
 
 var code_editor_manager: Node
 
@@ -32,7 +31,6 @@ func _ready() -> void:
 	filetree = %FileTree as Tree
 	code_editor_manager = %CodeEditorManager
 	terminal = %Terminal
-	code_editor_manager.undo_redo = undo_redo
 	terminal.set_cwd(directory.path)
 	var split = directory.path.rsplit("/", false, 1)
 	DisplayServer.window_set_title("Celestia - %s" % split[1])
@@ -49,11 +47,11 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_undo"):
-		if undo_redo.has_undo():
-			undo_redo.undo()
+		if Global.undo_redo.has_undo():
+			Global.undo_redo.undo()
 	elif event.is_action_pressed("ui_redo"):
-		if undo_redo.has_redo():
-			undo_redo.redo()
+		if Global.undo_redo.has_redo():
+			Global.undo_redo.redo()
 
 
 func _create_file_tree(parent: TreeItem, dir: Directory) -> void:
@@ -124,14 +122,14 @@ func _on_item_edited() -> void:
 
 	var new_path = old_path.get_base_dir().path_join(new_text)
 
-	undo_redo.create_action("Rename")
-	undo_redo.add_do_method(_rename_file.bind(old_path, new_path))
-	undo_redo.add_do_method(item.set_meta.bind("path", new_path))
-	undo_redo.add_do_method(item.set_text.bind(TreeColumn.TEXT, new_text))
-	undo_redo.add_undo_method(_rename_file.bind(new_path, old_path))
-	undo_redo.add_undo_method(item.set_meta.bind("path", old_path))
-	undo_redo.add_undo_method(item.set_text.bind(TreeColumn.TEXT, old_name))
-	undo_redo.commit_action()
+	Global.undo_redo.create_action("Rename")
+	Global.undo_redo.add_do_method(_rename_file.bind(old_path, new_path))
+	Global.undo_redo.add_do_method(item.set_meta.bind("path", new_path))
+	Global.undo_redo.add_do_method(item.set_text.bind(TreeColumn.TEXT, new_text))
+	Global.undo_redo.add_undo_method(_rename_file.bind(new_path, old_path))
+	Global.undo_redo.add_undo_method(item.set_meta.bind("path", old_path))
+	Global.undo_redo.add_undo_method(item.set_text.bind(TreeColumn.TEXT, old_name))
+	Global.undo_redo.commit_action()
 
 
 func _rename_file(from: String, to: String) -> void:

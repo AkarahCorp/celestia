@@ -23,6 +23,7 @@ config/icon="uid://ca8qwj5a4cngi"
 
 Prompts="*res://libraries/prompts.gd"
 Enum="*res://libraries/enums.gd"
+Global="*res://libraries/global.gd"
 
 [display]
 

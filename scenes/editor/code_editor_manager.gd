@@ -1,6 +1,5 @@
 extends VBoxContainer
 
-var undo_redo: UndoRedo
 var tabs: TabBar
 var editors: VBoxContainer
 var open_files: Dictionary = {}
@@ -27,7 +26,6 @@ func open_file(path: String, type: String) -> void:
 			editor = CodeEdit.new()
 			editor.set_script(preload("res://scenes/editor/CodeEditorHandler.gd"))
 			editor.file_path = path
-			editor.undo_redo = undo_redo
 			if file_cache.has(path):
 				editor.text = file_cache[path]
 			else:
