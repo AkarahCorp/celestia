@@ -1,10 +1,58 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0meu8blitsq6"]
+[gd_scene load_steps=21 format=3 uid="uid://b0meu8blitsq6"]
 
 [ext_resource type="Script" uid="uid://kte70v341dlk" path="res://scenes/editor/editor.gd" id="1_bc6i7"]
 [ext_resource type="Script" uid="uid://d4bcjd74uhli3" path="res://scenes/editor/code_editor_manager.gd" id="2_m0is4"]
+[ext_resource type="Script" uid="uid://dq5j6ebnp350c" path="res://types/handlers/FileTypeHandler.gd" id="2_p4u40"]
+[ext_resource type="Texture2D" uid="uid://cyuxolchiiuqp" path="res://assets/icons/files/item.svg" id="2_rolao"]
 [ext_resource type="FontVariation" uid="uid://cwn4lexc32bno" path="res://theme/font/_variations/italic425.tres" id="3_5cfe8"]
+[ext_resource type="Texture2D" uid="uid://dlurjpojncjq1" path="res://assets/icons/files/rule.svg" id="3_p4u40"]
 [ext_resource type="Script" uid="uid://dp6s6mhfdf2yj" path="res://scenes/editor/terminal.gd" id="4_jwsr6"]
+[ext_resource type="Texture2D" uid="uid://dt0cii2w8lk6" path="res://assets/icons/files/script.svg" id="4_syr16"]
+[ext_resource type="Texture2D" uid="uid://c5eauut3w5f6i" path="res://assets/icons/folders/rule.svg" id="5_qnluh"]
 [ext_resource type="FontVariation" uid="uid://dqlnvracqml0f" path="res://theme/font/_variations/mono425.tres" id="5_ro56m"]
+[ext_resource type="Script" uid="uid://cbgx1y78lqetf" path="res://types/handlers/FolderTypeHandler.gd" id="6_syr16"]
+
+[sub_resource type="Resource" id="Resource_syr16"]
+script = ExtResource("2_p4u40")
+pattern = "/data/*/engine/item/*.json"
+icon = ExtResource("2_rolao")
+type = 1
+metadata/_custom_type_script = "uid://dq5j6ebnp350c"
+
+[sub_resource type="Resource" id="Resource_qnluh"]
+script = ExtResource("2_p4u40")
+pattern = "/data/*/engine/rule/*.json"
+icon = ExtResource("3_p4u40")
+type = 2
+metadata/_custom_type_script = "uid://dq5j6ebnp350c"
+
+[sub_resource type="Resource" id="Resource_pq70c"]
+script = ExtResource("2_p4u40")
+pattern = "*.aka"
+icon = ExtResource("4_syr16")
+type = 3
+metadata/_custom_type_script = "uid://dq5j6ebnp350c"
+
+[sub_resource type="Resource" id="Resource_hg2ka"]
+script = ExtResource("2_p4u40")
+pattern = "*.json"
+icon = ExtResource("4_syr16")
+type = 4
+metadata/_custom_type_script = "uid://dq5j6ebnp350c"
+
+[sub_resource type="Resource" id="Resource_oljq2"]
+script = ExtResource("2_p4u40")
+pattern = "*.mcmeta"
+icon = ExtResource("4_syr16")
+type = 5
+metadata/_custom_type_script = "uid://dq5j6ebnp350c"
+
+[sub_resource type="Resource" id="Resource_i3ywb"]
+script = ExtResource("6_syr16")
+pattern = "/data/*/engine/rule*"
+icon = ExtResource("5_qnluh")
+type = 1
+metadata/_custom_type_script = "uid://cbgx1y78lqetf"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bc6i7"]
 content_margin_left = 0.0
@@ -37,6 +85,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 1
 script = ExtResource("1_bc6i7")
+FILE_TYPE_HANDLERS = Array[ExtResource("2_p4u40")]([SubResource("Resource_syr16"), SubResource("Resource_qnluh"), SubResource("Resource_pq70c"), SubResource("Resource_hg2ka"), SubResource("Resource_oljq2")])
+FOLDER_TYPE_HANDLERS = Array[ExtResource("6_syr16")]([SubResource("Resource_i3ywb")])
 
 [node name="MenuBar" type="MenuBar" parent="."]
 layout_mode = 2

@@ -22,6 +22,7 @@ config/icon="uid://ca8qwj5a4cngi"
 [autoload]
 
 Prompts="*res://libraries/prompts.gd"
+Enum="*res://libraries/enums.gd"
 
 [display]
 

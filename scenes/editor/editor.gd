@@ -1,5 +1,12 @@
 extends VBoxContainer
 
+## A list of file type handlers.
+## If none of these match, the file type will be [code]FileType.UNKNOWN[/code].
+@export var FILE_TYPE_HANDLERS: Array[FileTypeHandler]
+## A list of folder type handlers.
+## If none of these match, the folder type will be [code]FolderType.UNKNOWN[/code].
+@export var FOLDER_TYPE_HANDLERS: Array[FolderTypeHandler]
+
 enum TreeColumn {
 	TEXT
 }
@@ -7,30 +14,6 @@ enum TreeColumn {
 const UNKNOWN_FOLDER_ICON = preload("res://assets/icons/folders/unknown.svg")
 const UNKNOWN_FILE_ICON = preload("res://assets/icons/files/unknown.svg")
 
-const FILE_TYPE_HANDLERS: Array[Dictionary] = [
-	{
-		"pattern": "/data/*/engine/item/*.json",
-		"icon": preload("res://assets/icons/files/item.svg"),
-		"type": "item"
-	},
-	{
-		"pattern": "/data/*/engine/rule/*.json",
-		"icon": preload("res://assets/icons/files/rule.svg"),
-		"type": "rule"
-	},
-	{
-		"pattern": "*.aka",
-		"icon": preload("res://assets/icons/files/script.svg"),
-		"type": "script"
-	}
-]
-const FOLDER_TYPE_HANDLERS: Array[Dictionary] = [
-	{
-		"pattern": "/data/*/engine/rule*",
-		"icon": preload("res://assets/icons/folders/rule.svg"),
-		"type": "rule_folder"
-	}
-]
 const hidden_files: Array[String] = [
 	"/.gitattributes",
 	"/.git"
@@ -82,6 +65,7 @@ func _create_file_tree(parent: TreeItem, dir: Directory) -> void:
 		item.set_icon(TreeColumn.TEXT, UNKNOWN_FOLDER_ICON)
 		item.set_text(TreeColumn.TEXT, d.path.rsplit("/", false, 1)[1])
 		item.set_meta("path", d.path)
+		item.set_meta("is_folder", true)
 		
 		var handled = false
 		for handler in FOLDER_TYPE_HANDLERS:
@@ -115,6 +99,7 @@ func _create_file_tree(parent: TreeItem, dir: Directory) -> void:
 
 		item.set_text(TreeColumn.TEXT, f)
 		item.set_meta("path", path)
+		item.set_meta("is_folder", false)
 
 
 func _on_item_activated() -> void:

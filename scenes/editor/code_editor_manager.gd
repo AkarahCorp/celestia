@@ -23,7 +23,7 @@ func open_file(path: String, type: String) -> void:
 
 	var editor
 	match type:
-		"item", "rule", "script", "unknown":
+		_:
 			editor = CodeEdit.new()
 			editor.set_script(preload("res://scenes/editor/CodeEditorHandler.gd"))
 			editor.file_path = path
