@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://px6iappy5byf"]
+[gd_scene load_steps=8 format=3 uid="uid://px6iappy5byf"]
 
 [ext_resource type="Script" uid="uid://2ur57gwerd8c" path="res://scenes/start/start.gd" id="1_1eg8k"]
 [ext_resource type="FontVariation" uid="uid://4w5vy3kwlwl2" path="res://theme/font/_variations/main600.tres" id="1_662lp"]
 [ext_resource type="Texture2D" uid="uid://ca8qwj5a4cngi" path="res://assets/icon.png" id="2_1eg8k"]
 [ext_resource type="FontVariation" uid="uid://binohnbypnacg" path="res://theme/font/_variations/main425.tres" id="3_1eg8k"]
+[ext_resource type="Script" uid="uid://c8paknb717406" path="res://scenes/start/version.gd" id="5_stwfd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oeh0t"]
 font = ExtResource("1_662lp")
@@ -42,11 +43,12 @@ layout_mode = 2
 text = "Celestia Editor"
 label_settings = SubResource("LabelSettings_oeh0t")
 
-[node name="Label2" type="Label" parent="Labels"]
+[node name="Version" type="Label" parent="Labels"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 0
-text = "v0.1"
 label_settings = SubResource("LabelSettings_stwfd")
+script = ExtResource("5_stwfd")
 
 [node name="Actions" type="HBoxContainer" parent="."]
 layout_mode = 2
