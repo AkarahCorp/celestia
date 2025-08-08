@@ -47,4 +47,5 @@ limits/debugger/max_chars_per_second=524288
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.1564, 0.16116, 0.17, 1)
