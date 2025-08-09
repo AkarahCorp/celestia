@@ -13,7 +13,7 @@ func _ready() -> void:
 	tabs.tab_changed.connect(_on_tab_changed)
 	tabs.tab_close_pressed.connect(_on_tab_close_pressed)
 
-func open_file(path: String, type: String) -> void:
+func open_file(path: String, type: Enum.FileType) -> void:
 	if open_files.has(path):
 		tabs.current_tab = open_files[path].tab_index
 		return
