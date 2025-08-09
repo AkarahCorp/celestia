@@ -13,7 +13,7 @@ func _ready() -> void:
 	tabs.tab_changed.connect(_on_tab_changed)
 	tabs.tab_close_pressed.connect(_on_tab_close_pressed)
 
-func open_file(path: String, type: Enum.FileType) -> void:
+func open_file(path: String, type: int) -> void:
 	if open_files.has(path):
 		tabs.current_tab = open_files[path].tab_index
 		return
@@ -22,23 +22,12 @@ func open_file(path: String, type: Enum.FileType) -> void:
 
 	var editor
 	match type:
-		_:
-			editor = CodeEdit.new()
-			editor.set_script(preload("res://scenes/editor/CodeEditorHandler.gd"))
-			editor.file_path = path
-			if file_cache.has(path):
-				editor.text = file_cache[path]
-			else:
-				var file = FileAccess.open(path, FileAccess.READ)
-				if file:
-					var text = file.get_as_text()
-					editor.text = text
-					file_cache[path] = text
-			editor.size_flags_vertical = Control.SIZE_EXPAND_FILL
-			editor.text_changed_since_save.connect(_on_text_changed_since_save.bind(path))
-		_:
-			printerr("Unsupported file type: %s" % type)
-			return
+		Enum.FileType.SCRIPT:
+			editor = open_code_editor(preload("res://scenes/editor/handlers/ScriptFileHandler.gd"), path)
+		Enum.FileType.JSON_OBJECT, Enum.FileType.ITEM, Enum.FileType.RULE, Enum.FileType.PACK_METADATA:
+			editor = open_code_editor(preload("res://scenes/editor/handlers/JSONFileHandler.gd"), path)
+		Enum.FileType.UNKNOWN:
+			editor = open_code_editor(preload("res://scenes/editor/handlers/GenericTextHandler.gd"), path)
 
 	var tab_index = tabs.get_tab_count()
 	tabs.add_tab(path.get_file())
@@ -51,6 +40,21 @@ func open_file(path: String, type: Enum.FileType) -> void:
 	}
 	tabs.current_tab = tab_index
 
+func open_code_editor(script: Script, path: String):
+	var editor = CodeEdit.new()
+	editor.set_script(script)
+	editor.file_path = path
+	if file_cache.has(path):
+		editor.text = file_cache[path]
+	else:
+		var file = FileAccess.open(path, FileAccess.READ)
+		if file:
+			var text = file.get_as_text()
+			editor.text = text
+			file_cache[path] = text
+	editor.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	editor.text_changed_since_save.connect(_on_text_changed_since_save.bind(path))
+	return editor
 
 func _on_tab_changed(tab: int) -> void:
 	if tab < 0 or tab >= tabs.get_tab_count():

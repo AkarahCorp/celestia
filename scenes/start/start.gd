@@ -5,12 +5,6 @@ var dialog: FileDialog
 func _ready() -> void:
 	DisplayServer.window_set_min_size(Vector2i(400, 300))
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func open_existing_datapack() -> void:
 	dialog = FileDialog.new()
 	dialog.set_file_mode(FileDialog.FILE_MODE_OPEN_DIR)

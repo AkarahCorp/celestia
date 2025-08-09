@@ -75,7 +75,7 @@ func _create_file_tree(parent: TreeItem, dir: Directory) -> void:
 		
 		if not handled:
 			item.set_icon(TreeColumn.TEXT, UNKNOWN_FOLDER_ICON)
-			item.set_meta("type", "unknown_folder")
+			item.set_meta("type", Enum.FolderType.UNKNOWN)
 		_create_file_tree(item, d)
 	for f in dir.files:
 		var path = "%s/%s" % [dir.path, f]
@@ -93,7 +93,7 @@ func _create_file_tree(parent: TreeItem, dir: Directory) -> void:
 		
 		if not handled:
 			item.set_icon(TreeColumn.TEXT, UNKNOWN_FILE_ICON)
-			item.set_meta("type", "unknown")
+			item.set_meta("type", Enum.FileType.UNKNOWN)
 
 		item.set_text(TreeColumn.TEXT, f)
 		item.set_meta("path", path)
@@ -145,4 +145,5 @@ func _on_item_mouse_selected(position: Vector2, mouse_button_index: int) -> void
 			var path = selected.get_meta("path")
 			if not DirAccess.dir_exists_absolute(path):
 				var type = selected.get_meta("type")
+				print(type)
 				code_editor_manager.open_file(path, type)

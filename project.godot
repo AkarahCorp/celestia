@@ -29,6 +29,10 @@ Global="*res://libraries/global.gd"
 
 window/stretch/aspect="expand"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/ColorPreview/plugin.cfg", "res://addons/log/plugin.cfg")
+
 [gui]
 
 theme/custom="uid://5fy4olu4nidd"
